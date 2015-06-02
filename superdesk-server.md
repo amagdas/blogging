@@ -1,4 +1,4 @@
-## Superdesk server overview
+## Superdesk server architecture overview
 
 The [Superdesk](https://github.com/superdesk/superdesk) open source project is conceptually built
 following the REST architecture, the client is an Angular driven application and the backend is being built
@@ -36,4 +36,4 @@ As mentioned before, the REST API is being defined using the Eve framework and [
 
 In order to manage the growing complexity of the application, we moved away from the standard way of defining Eve endpoints, basically we
 introduced a few more abstractions, the main ones being [Resource](https://github.com/superdesk/superdesk/blob/master/server/superdesk/resource.py)
-and [Service](https://github.com/superdesk/superdesk/blob/master/server/superdesk/services.py)
+and [Service](https://github.com/superdesk/superdesk/blob/master/server/superdesk/services.py).
