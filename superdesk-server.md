@@ -24,6 +24,9 @@ Optional dependencies:
 
 The full list of development dependencies can be found [here](https://github.com/superdesk/superdesk/blob/master/server/requirements.txt)
 
+### Overview
+![Architecture overview](https://github.com/amagdas/blogging/blob/master/Superdesk_server_diagram.png)
+
 ### Running applications
 
 1. REST API
