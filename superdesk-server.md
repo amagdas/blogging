@@ -1,10 +1,10 @@
 ## Superdesk server architecture overview
 
-The [Superdesk](https://github.com/superdesk/superdesk) open source project is conceptually built
+The [Superdesk](https://github.com/superdesk/superdesk) open source project is built
 following the REST architecture, the client is an Angular driven application and the backend is being built
-using Python 3 and the Flask based [Eve framework](http://python-eve.org)
+using Python 3 and the Flask based [Eve framework](http://python-eve.org).
 
-This post will do a deep dive on the backend side of the solution, the client side will be tackled by an upcoming post.
+This post will do a deep dive on the backend side of the current architecture, the client side will be tackled by an upcoming post.
 
 ### Tech stack
 
@@ -27,16 +27,7 @@ The full list of development dependencies can be found [here](https://github.com
 ### Overview
 ![Architecture overview](https://github.com/amagdas/blogging/blob/master/Superdesk_server_diagram.png)
 
-### Running applications
+In the next part of the series we will dive into the details of the abstractions introduced in order to make this architecture
+play nicely with Eve and Celery.
 
-1. REST API
-2. Celery workers
-3. WebSocket server
-
-#### REST API
-
-As mentioned before, the REST API is being defined using the Eve framework and [Cerberus](http://cerberus.readthedocs.org/en/latest/) schemas.
-
-In order to manage the growing complexity of the application, we moved away from the standard way of defining Eve endpoints, basically we
-introduced a few more abstractions, the main ones being [Resource](https://github.com/superdesk/superdesk/blob/master/server/superdesk/resource.py)
-and [Service](https://github.com/superdesk/superdesk/blob/master/server/superdesk/services.py).
+Develop with passion - Adrian
