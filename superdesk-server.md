@@ -27,7 +27,22 @@ The full list of development dependencies can be found [here](https://github.com
 ### Overview
 ![Architecture overview](https://github.com/amagdas/blogging/blob/master/Superdesk_server_diagram.png)
 
-In the next part of the series we will dive into the details of the abstractions introduced in order to make this architecture
-play nicely with Eve and Celery.
+What's visible at a quick glance is that the current backend infrastructure is comprised of 3 running apps:
+- Flask/Eve web application running on top of [Gunicorn](http://gunicorn.org/)
+- Celery application  sharing a lot of the internal infrastructure of the Eve application
+- WebSocket server to handle client notifications
 
-Develop with passion - Adrian
+On the storage side of things, we have:
+- Mongo as the main storage engine
+- Elastic as the main search engine
+- Redis for sending data to and from Celery workers
+
+In the next parts of the series we will dive into the following topics:
+- the details of the abstractions introduced in order to make Celery workers use the same services for business logic handling
+as Eve application
+- challenges on how to keep data consistent between Mongo and Elastic and possible solutions
+- ways to introduce new apps into the mix
+- extensibility points for Superdesk as a platform
+
+See you next time and develop with passion,
+Adrian
