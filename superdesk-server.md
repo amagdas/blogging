@@ -44,5 +44,5 @@ as Eve application
 - ways to introduce new apps into the mix
 - extensibility points for Superdesk as a platform
 
-See you next time and develop with passion,
+See you next time and develop with passion,  
 Adrian
