@@ -52,8 +52,11 @@ https://github.com/mroth/phoenix-showdown/blob/master/RESULTS_v2.md
 - static build tools with ES6 as default
 - pretty error pages
 - packaging
+`:observer.start()`
 
 ### Reliable
+Supervisors
+Supervision trees
 
 ## Channels
 
@@ -69,7 +72,6 @@ They are isolated and concurrent hence fault tolerant.
 - Distributed Erlang
 - Redis
 - Other
-
 
 # Next steps
 http://elixir-lang.org/
