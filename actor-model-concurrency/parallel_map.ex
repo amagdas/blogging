@@ -21,11 +21,11 @@ defmodule Double do
   end
 
   def run(col) do
-    :timer.tc(fn() -> Enum.map([1, 2, 3, 4], &Double.slow/1) end)
+    :timer.tc(fn() -> Enum.map(col, &Double.slow/1) end)
   end
 
   def run_parallel(col) do
-    :timer.tc(fn() -> Parallel.map([1, 2, 3, 4], &Double.slow/1) end)
+    :timer.tc(fn() -> Parallel.map(col, &Double.slow/1) end)
   end
 
 end
