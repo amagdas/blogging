@@ -22,10 +22,16 @@ defmodule Double do
 
   def run(col) do
     :timer.tc(fn() -> Enum.map(col, &Double.slow/1) end)
+    |> print
   end
 
   def run_parallel(col) do
     :timer.tc(fn() -> Parallel.map(col, &Double.slow/1) end)
+    |> print
+  end
+
+  defp print({ time, value }) do
+    IO.puts "Took: #{div(time , 1000000)}s Result: #{inspect value}"
   end
 
 end

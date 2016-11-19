@@ -4,33 +4,55 @@ defmodule Talker do
       {:greet, name, sender} -> IO.puts("Hello #{name} from #{inspect sender}")
       {:praise, name} -> IO.puts("#{name}, you're amazing")
       {:celebrate, name, age} -> IO.puts("Here's to another #{age} years, #{name}")
+      {:kaboom} -> exit(:kaboom)
       {:shutdown} -> exit(:normal)
     end
     loop
   end
-end
 
-defmodule KeyValueStore do
-  def loop(map) do
+  def run do
+    spawn(&Talker.loop/0)
+    # spawn_link(&Talker.loop/0)
+  end
+
+  def trapped_exit do
+    Process.flag(:trap_exit, true)
+    spawn_link(&Talker.loop/0)
+
     receive do
-      {:get, key, caller} ->
-        send caller, Map.get(map, key)
-        loop(map)
-      {:put, key, value} ->
-        loop(Map.put(map, key, value))
+      {:EXIT, from_pid, reason} -> IO.puts "Exit reason: #{reason}"
     end
   end
+
+  def greet(pid, message) do
+    send(pid, {:greet, message, self()})
+  end
+
 end
 
-# talker = spawn(&Talker.loop/0)
-# send(talker, {:greet, "Hey", self()})
-# send(talker, {:praise, "Dewey"})
-# send(talker, {:celebrate, "Louie", 16})
-# send(talker, {:shutdown})
-# IO.puts("Process still alive? #{inspect Process.alive?(talker)}")
+defmodule Stack do
+  def loop(stack) do
+    receive do
+      {:pop, caller} ->
+        [h|t] = stack
+        send caller, h
+        loop(t)
+      {:push, value} ->
+        loop([value | stack])
+    end
+    loop(stack)
+  end
 
-# iex(3)> kv = spawn(KeyValueStore, :loop, [%{greet: "Hello"}])
-# #PID<0.96.0>
-# iex(4)> send(kv, {:get, :greet, self()})
-# {:get, :greet, #PID<0.88.0>}
-#  flush
+  def run do
+    spawn(Stack, :loop, [[greet: "Hello"]])
+  end
+
+  def pop(pid) do
+    send(pid, {:pop, self()})
+  end
+
+  def push(pid, value) do
+    send(pid, {:push, value})
+  end
+
+end
