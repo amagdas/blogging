@@ -1,7 +1,10 @@
-defmodule Stack do
+defmodule StackGenServer do
   use GenServer
 
   # Client
+  def run do
+    GenServer.start_link(StackGenServer, [:hello])
+  end
 
   def start_link(state, opts \\ []) do
     GenServer.start_link(__MODULE__, state, opts)
