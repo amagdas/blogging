@@ -27,6 +27,8 @@ Main features:
 - Tasks
 - type signature
 - warn
+- ports
+- subscriptions
 
 ## TEA:
 ```
