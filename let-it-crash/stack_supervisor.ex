@@ -21,5 +21,4 @@ defmodule StackSupervisor do
   def push(value) do
     GenServer.cast(MyStack, {:push, value})
   end
-
 end

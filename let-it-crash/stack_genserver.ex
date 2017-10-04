@@ -1,16 +1,16 @@
 defmodule StackGenServer do
   use GenServer
 
+  def start_link(state, opts \\ []) do
+    GenServer.start_link(__MODULE__, state, opts)
+  end
+
   # Client
   def run do
     GenServer.start_link(StackGenServer, [:hello])
   end
 
-  def start_link(state, opts \\ []) do
-    GenServer.start_link(__MODULE__, state, opts)
-  end
-
-  def push(pid, item) do
+  def add(pid, item) do
     GenServer.cast(pid, {:push, item})
   end
 

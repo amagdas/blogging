@@ -6,54 +6,35 @@ defmodule Talker do
       {:celebrate, name, age} -> IO.puts("Here's to another #{age} years, #{name}")
       {:kaboom} -> exit(:kaboom)
       {:shutdown} -> exit(:normal)
-    after
-      1_000 -> "nothing after 1s"
     end
     loop()
   end
 
   def run do
     spawn(&Talker.loop/0)
-    # spawn_link(&Talker.loop/0)
+  end
+  def run_linked do
+    spawn_link(&Talker.loop/0)
   end
 
   def trapped_exit do
+    # system process
     Process.flag(:trap_exit, true)
-    spawn_link(&Talker.loop/0)
+    talker = run_linked
+    send talker, {:kaboom}
 
     receive do
       {:EXIT, from_pid, reason} -> IO.puts "Exit reason: #{inspect from_pid} #{reason}"
+    after
+      1_000 -> "nothing after 1s"
     end
+
+    # suicide
+    #Process.exit(self(), :kill)
   end
 
   def greet(pid, message) do
     send(pid, {:greet, message, self()})
   end
 
-end
-
-defmodule Stack do
-  def loop(stack) do
-    receive do
-      {:pop, caller} ->
-        [h|t] = stack
-        send caller, h
-        loop(t)
-      {:push, value} ->
-        loop([value | stack])
-    end
-    loop(stack)
-  end
-
-  def run do
-    spawn(Stack, :loop, [[greet: "Hello"]])
-  end
-
-  def pop(pid) do
-    send(pid, {:pop, self()})
-  end
-
-  def push(pid, value) do
-    send(pid, {:push, value})
-  end
 end

@@ -12,6 +12,12 @@ defmodule Parallel do
       end
     end)
   end
+
+  def map_task(collection, fun) do
+    collection
+    |> Task.async_stream(fun)
+    |> Enum.map(fn {:ok, val} -> val end)
+  end
 end
 
 defmodule Double do
@@ -27,6 +33,11 @@ defmodule Double do
 
   def run_parallel(col) do
     :timer.tc(fn() -> Parallel.map(col, &Double.slow/1) end)
+    |> print
+  end
+
+  def run_parallel_task(col) do
+    :timer.tc(fn() -> Parallel.map_task(col, &Double.slow/1) end)
     |> print
   end
 
