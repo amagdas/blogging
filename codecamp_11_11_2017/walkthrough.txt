@@ -1,0 +1,25 @@
+1. Agents/Processes
+- are the key ingredient in building fault tolerant and scalable apps
+- are shared nothing execution contexts which are PREEMTIVELY scheduled across a set of OS threads
+- intrinsically capable of running concurrently
+
+2. Anatomy of a process(cont.)
+- message box
+- non shared working memory
+- code path & own execution flow
+
+3. Message box
+- process may receive arbitrary messages and store them in the process's inbox
+- filtered using pattern matching
+- message passing ties the small programs into bigger ones
+
+4. Non shared memory(most of the time)
+- each process has it's own block of RAM
+- when a process is done, the memory if freed O(1)
+- you have to be aware of this and think how to keep the state in short lived processes so you can reclaim the memory fast
+- you can set memory limits per process
+
+5. Process execution
+- modules are the unit of code organization
+- processes ar the unit of code execution
+- when the code stops or errors, the process exits
