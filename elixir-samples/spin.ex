@@ -7,9 +7,9 @@ defmodule Spin do
     receive do
       :stop ->
         IO.puts "Shutting down ..."
-        exit(:normal)
+       exit(:normal)
     after 2_000 ->
-      IO.puts "*******Spinning since #{uptime} on #{node()}!!!"
+      IO.puts "*******Spinning #{uptime} times on #{node()} !!!"
     end
     Spin.loop(uptime + 1)
   end

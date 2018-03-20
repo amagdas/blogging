@@ -19,7 +19,6 @@ defmodule StackGenServer do
   end
 
   # Server (callbacks)
-
   def handle_call(:pop, _from, [h | t]) do
     {:reply, h, t}
   end

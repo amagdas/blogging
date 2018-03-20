@@ -66,9 +66,10 @@ Demo2 - Grepex:
 - `GenServer.cast({IxQuick, :node3@crafter}, {:search, ["elixir"], self()})`
 - query based routing
 
-Demo3 - gossip cluster
+Demo3 - autocluster
 
 Notes:
-`nl Grepex` - deploy to other servers
+`nl Grepex` - deploy to other servers, beam must be present
 pid = Node.spawn :node2@crafter, Grepex.SearchServer, :run, []
 :rpc.call(:"node2@crafter", Grepex.SearchServer, :search, [["elixir"], self()])
+`epmd -names`
